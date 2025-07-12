@@ -19,7 +19,6 @@ export function useAssignments(userId) {
   const assignmentsCollection = collection(db, 'assignments')
 
   const fetchAssignments = async () => {
-    // Ensure only the string user ID is used in the query
     const uid = userId.value && typeof userId.value === 'object' && 'uid' in userId.value
       ? userId.value.uid
       : userId.value
@@ -50,7 +49,6 @@ export function useAssignments(userId) {
 
   const addAssignment = async (assignmentData) => {
     try {
-      // Ensure only the string user ID is stored
       const uid = userId.value && typeof userId.value === 'object' && 'uid' in userId.value
         ? userId.value.uid
         : userId.value

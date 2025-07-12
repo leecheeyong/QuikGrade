@@ -49,7 +49,6 @@ export function useAuth() {
     })
   }
 
-  // Initialize auth state listener
   initAuth()
 
   return {

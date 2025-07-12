@@ -1,11 +1,10 @@
 <template>
   <div class="min-h-screen bg-gradient-to-br from-blue-50 to-white">
-    <!-- Navigation -->
     <nav class="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
           <div class="flex items-center">
-            <h1 class="text-2xl font-bold text-gray-900">QuickGrade</h1>
+            <h1 class="text-2xl font-bold text-gray-900">QuikGrade</h1>
           </div>
           <router-link
             to="/login"
@@ -17,7 +16,6 @@
       </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
       <div class="text-center">
         <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
@@ -45,7 +43,6 @@
       </div>
     </section>
 
-    <!-- Features Section -->
     <section id="features" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <div class="text-center mb-16">
         <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
@@ -57,7 +54,6 @@
       </div>
 
       <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        <!-- Feature 1 -->
         <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
           <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
             <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -70,7 +66,6 @@
           </p>
         </div>
 
-        <!-- Feature 2 -->
         <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
           <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-6">
             <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -83,7 +78,6 @@
           </p>
         </div>
 
-        <!-- Feature 3 -->
         <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
           <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
             <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -96,7 +90,6 @@
           </p>
         </div>
 
-        <!-- Feature 4 -->
         <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
           <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-6">
             <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -109,7 +102,6 @@
           </p>
         </div>
 
-        <!-- Feature 5 -->
         <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
           <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-6">
             <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -122,7 +114,6 @@
           </p>
         </div>
 
-        <!-- Feature 6 -->
         <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
           <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
             <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -137,27 +128,6 @@
       </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="bg-blue-600">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div class="text-center">
-          <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">
-            Ready to streamline your grading?
-          </h2>
-          <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-            Join teachers who are saving time with QuickGrade's clean, efficient grading system.
-          </p>
-          <router-link
-            to="/login"
-            class="bg-white hover:bg-gray-100 text-blue-600 font-medium py-3 px-8 rounded-lg transition-colors duration-200 text-lg inline-block"
-          >
-            Get Started Free
-          </router-link>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer -->
     <footer class="bg-gray-50 border-t border-gray-200">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="text-center">

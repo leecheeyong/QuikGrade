@@ -48,13 +48,11 @@
         </router-link>
       </div>
 
-      <!-- Loading State -->
       <div v-if="loading" class="text-center py-12">
         <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-500"></div>
         <p class="text-gray-600 mt-2">Loading assignments...</p>
       </div>
 
-      <!-- Empty State -->
       <div v-else-if="assignments.length === 0" class="text-center py-12">
         <svg
           class="w-16 h-16 text-gray-300 mx-auto mb-4"
@@ -76,7 +74,6 @@
         </router-link>
       </div>
 
-      <!-- Assignments Grid -->
       <div v-else class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <router-link
           v-for="assignment in assignments"
@@ -113,7 +110,7 @@ import { useAssignments } from '../composables/useAssignments'
 import emitter from '../eventBus'
 
 const router = useRouter()
-const { user, signOut } = useAuth()
+const { user, signOut, isAuthReady } = useAuth()
 const userId = computed(() => user.value && user.value.uid)
 const userEmail = computed(() => user.value && user.value.email)
 const { assignments, loading, fetchAssignments } = useAssignments(userId)
@@ -132,6 +129,12 @@ const handleSignOut = async () => {
 watch(userId, (newUid) => {
   if (newUid) {
     fetchAssignments()
+  }
+}, { immediate: true })
+
+watch([() => isAuthReady && isAuthReady.value, () => user.value], ([ready, val]) => {
+  if (ready && val === null) {
+    router.push('/login')
   }
 }, { immediate: true })
 

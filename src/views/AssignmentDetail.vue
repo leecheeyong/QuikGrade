@@ -1,6 +1,5 @@
 <template>
   <div class="min-h-screen bg-gray-50">
-    <!-- Header -->
     <header class="bg-white shadow-sm border-b border-gray-200">
       <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
@@ -22,7 +21,6 @@
       </div>
     </header>
 
-    <!-- Loading State -->
     <div v-if="loading" class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div class="text-center py-12">
         <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-500"></div>
@@ -169,7 +167,6 @@ import { ref, computed, watch, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useAuth } from '../composables/useAuth'
 import { useAssignments } from '../composables/useAssignments'
-import emitter from '../eventBus'
 
 const route = useRoute()
 const router = useRouter()
@@ -199,11 +196,9 @@ const formatDate = (timestamp) => {
 
 const toggleEdit = () => {
   if (isEditing.value) {
-    // Cancel editing
     isEditing.value = false
     error.value = ''
   } else {
-    // Start editing
     if (assignment.value) {
       editForm.value = {
         studentName: assignment.value.studentName,
@@ -231,9 +226,9 @@ const handleSave = async () => {
 
     await updateAssignment(route.params.id, updates)
     isEditing.value = false
+    
     // Refresh data
     await fetchAssignments()
-    emitter.emit('assignmentsChanged')
   } catch (err) {
     error.value = 'Failed to update assignment. Please try again.'
     console.error('Error updating assignment:', err)
@@ -246,7 +241,6 @@ const handleDelete = async () => {
   if (confirm('Are you sure you want to delete this assignment? This action cannot be undone.')) {
     try {
       await deleteAssignment(route.params.id)
-      emitter.emit('assignmentsChanged')
       router.push('/dashboard')
     } catch (err) {
       error.value = 'Failed to delete assignment. Please try again.'
