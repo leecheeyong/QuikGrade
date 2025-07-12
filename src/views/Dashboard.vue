@@ -48,6 +48,27 @@
         </router-link>
       </div>
 
+      <!-- Filter Bar -->
+      <div class="flex flex-col sm:flex-row gap-4 mb-6">
+        <input
+          v-model="filterStudent"
+          type="text"
+          placeholder="Filter by student name"
+          class="input-field max-w-xs"
+        />
+        <input
+          v-model="filterTitle"
+          type="text"
+          placeholder="Filter by assignment title"
+          class="input-field max-w-xs"
+        />
+        <input
+          v-model="filterDate"
+          type="date"
+          class="input-field max-w-xs"
+        />
+      </div>
+
       <div v-if="loading" class="text-center py-12">
         <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-500"></div>
         <p class="text-gray-600 mt-2">Loading assignments...</p>
@@ -76,7 +97,7 @@
 
       <div v-else class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <router-link
-          v-for="assignment in assignments"
+          v-for="assignment in filteredAssignments"
           :key="assignment.id"
           :to="`/assignment/${assignment.id}`"
           class="card p-6 hover:shadow-lg transition-shadow duration-200"
@@ -103,7 +124,7 @@
 </template>
 
 <script setup>
-import { computed, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuth } from '../composables/useAuth'
 import { useAssignments } from '../composables/useAssignments'
@@ -114,6 +135,19 @@ const { user, signOut, isAuthReady } = useAuth()
 const userId = computed(() => user.value && user.value.uid)
 const userEmail = computed(() => user.value && user.value.email)
 const { assignments, loading, fetchAssignments } = useAssignments(userId)
+
+const filterStudent = ref('')
+const filterTitle = ref('')
+const filterDate = ref('')
+
+const filteredAssignments = computed(() => {
+  return assignments.value.filter(a => {
+    const matchesStudent = filterStudent.value === '' || a.studentName.toLowerCase().includes(filterStudent.value.toLowerCase())
+    const matchesTitle = filterTitle.value === '' || a.title.toLowerCase().includes(filterTitle.value.toLowerCase())
+    const matchesDate = filterDate.value === '' || (a.createdAt && new Date(a.createdAt.toDate ? a.createdAt.toDate() : a.createdAt).toISOString().slice(0, 10) === filterDate.value)
+    return matchesStudent && matchesTitle && matchesDate
+  })
+})
 
 const formatDate = (timestamp) => {
   if (!timestamp) return ''
