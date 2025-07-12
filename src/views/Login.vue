@@ -1,5 +1,7 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-primary-50 to-white flex items-center justify-center px-4">
+  <div
+    class="min-h-screen bg-gradient-to-br from-primary-50 to-white flex items-center justify-center px-4"
+  >
     <div class="card w-full max-w-md p-8">
       <div class="text-center mb-8">
         <h1 class="text-3xl font-bold text-gray-900 mb-2">QuikGrade</h1>
@@ -8,7 +10,10 @@
 
       <form @submit.prevent="handleSubmit" class="space-y-6">
         <div>
-          <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            for="email"
+            class="block text-sm font-medium text-gray-700 mb-1"
+          >
             Email
           </label>
           <input
@@ -22,7 +27,10 @@
         </div>
 
         <div>
-          <label for="password" class="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            for="password"
+            class="block text-sm font-medium text-gray-700 mb-1"
+          >
             Password
           </label>
           <input
@@ -39,11 +47,7 @@
           {{ error }}
         </div>
 
-        <button
-          type="submit"
-          :disabled="isLoading"
-          class="btn-primary w-full"
-        >
+        <button type="submit" :disabled="isLoading" class="btn-primary w-full">
           <span v-if="isLoading">Signing in...</span>
           <span v-else>Sign In</span>
         </button>
@@ -56,7 +60,7 @@
             @click="toggleMode"
             class="text-primary-600 hover:text-primary-500 font-medium"
           >
-            {{ isSignUp ? 'Sign In' : 'Sign Up' }}
+            {{ isSignUp ? "Sign In" : "Sign Up" }}
           </button>
         </p>
       </div>
@@ -65,42 +69,51 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useAuth } from '../composables/useAuth'
+import { ref, watch } from "vue";
+import { useRouter } from "vue-router";
+import { useAuth } from "../composables/useAuth";
 
-const router = useRouter()
-const { signIn, signUp } = useAuth()
+const router = useRouter();
+const { signIn, signUp, user } = useAuth();
 
-const email = ref('')
-const password = ref('')
-const error = ref('')
-const isLoading = ref(false)
-const isSignUp = ref(false)
+const email = ref("");
+const password = ref("");
+const error = ref("");
+const isLoading = ref(false);
+const isSignUp = ref(false);
 
 const toggleMode = () => {
-  isSignUp.value = !isSignUp.value
-  error.value = ''
-}
+  isSignUp.value = !isSignUp.value;
+  error.value = "";
+};
 
 const handleSubmit = async () => {
-  if (isLoading.value) return
-  
-  isLoading.value = true
-  error.value = ''
+  if (isLoading.value) return;
+
+  isLoading.value = true;
+  error.value = "";
 
   try {
-    const result = isSignUp.value 
+    const result = isSignUp.value
       ? await signUp(email.value, password.value)
-      : await signIn(email.value, password.value)
+      : await signIn(email.value, password.value);
 
     if (result.error) {
-      error.value = result.error
+      error.value = result.error;
     } else {
-      router.push('/dashboard')
+      router.push("/dashboard");
     }
   } finally {
-    isLoading.value = false
+    isLoading.value = false;
   }
-}
+};
+
+watch(
+  () => user.value,
+  (val) => {
+    if (val) {
+      router.push("/dashboard");
+    }
+  }
+);
 </script>

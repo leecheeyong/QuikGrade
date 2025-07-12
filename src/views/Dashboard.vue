@@ -5,10 +5,7 @@
         <div class="flex justify-between items-center h-16">
           <h1 class="text-2xl font-bold text-gray-900">QuikGrade</h1>
           <div class="flex items-center gap-4">
-            <span
-              v-if="userEmail"
-              class="text-gray-700 text-sm"
-            >
+            <span v-if="userEmail" class="text-gray-700 text-sm">
               {{ userEmail }}
             </span>
             <button @click="handleSignOut" class="btn-secondary">
@@ -20,7 +17,9 @@
     </header>
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+      <div
+        class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8"
+      >
         <div>
           <h2 class="text-xl font-semibold text-gray-900">Your Assignments</h2>
           <p class="text-gray-600 mt-1">
@@ -62,15 +61,13 @@
           placeholder="Filter by assignment title"
           class="input-field max-w-xs"
         />
-        <input
-          v-model="filterDate"
-          type="date"
-          class="input-field max-w-xs"
-        />
+        <input v-model="filterDate" type="date" class="input-field max-w-xs" />
       </div>
 
       <div v-if="loading" class="text-center py-12">
-        <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-500"></div>
+        <div
+          class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-500"
+        ></div>
         <p class="text-gray-600 mt-2">Loading assignments...</p>
       </div>
 
@@ -88,8 +85,12 @@
             d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
           ></path>
         </svg>
-        <h3 class="text-lg font-medium text-gray-900 mb-2">No assignments yet</h3>
-        <p class="text-gray-600 mb-6">Get started by creating your first assignment</p>
+        <h3 class="text-lg font-medium text-gray-900 mb-2">
+          No assignments yet
+        </h3>
+        <p class="text-gray-600 mb-6">
+          Get started by creating your first assignment
+        </p>
         <router-link to="/add-assignment" class="btn-primary">
           Create Assignment
         </router-link>
@@ -124,53 +125,70 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue'
-import { useRouter } from 'vue-router'
-import { useAuth } from '../composables/useAuth'
-import { useAssignments } from '../composables/useAssignments'
-import emitter from '../eventBus'
+import { computed, ref, watch } from "vue";
+import { useRouter } from "vue-router";
+import { useAuth } from "../composables/useAuth";
+import { useAssignments } from "../composables/useAssignments";
+import emitter from "../eventBus";
 
-const router = useRouter()
-const { user, signOut, isAuthReady } = useAuth()
-const userId = computed(() => user.value && user.value.uid)
-const userEmail = computed(() => user.value && user.value.email)
-const { assignments, loading, fetchAssignments } = useAssignments(userId)
+const router = useRouter();
+const { user, signOut, isAuthReady } = useAuth();
+const userId = computed(() => user.value && user.value.uid);
+const userEmail = computed(() => user.value && user.value.email);
+const { assignments, loading, fetchAssignments } = useAssignments(userId);
 
-const filterStudent = ref('')
-const filterTitle = ref('')
-const filterDate = ref('')
+const filterStudent = ref("");
+const filterTitle = ref("");
+const filterDate = ref("");
 
 const filteredAssignments = computed(() => {
-  return assignments.value.filter(a => {
-    const matchesStudent = filterStudent.value === '' || a.studentName.toLowerCase().includes(filterStudent.value.toLowerCase())
-    const matchesTitle = filterTitle.value === '' || a.title.toLowerCase().includes(filterTitle.value.toLowerCase())
-    const matchesDate = filterDate.value === '' || (a.createdAt && new Date(a.createdAt.toDate ? a.createdAt.toDate() : a.createdAt).toISOString().slice(0, 10) === filterDate.value)
-    return matchesStudent && matchesTitle && matchesDate
-  })
-})
+  return assignments.value.filter((a) => {
+    const matchesStudent =
+      filterStudent.value === "" ||
+      a.studentName.toLowerCase().includes(filterStudent.value.toLowerCase());
+    const matchesTitle =
+      filterTitle.value === "" ||
+      a.title.toLowerCase().includes(filterTitle.value.toLowerCase());
+    const matchesDate =
+      filterDate.value === "" ||
+      (a.createdAt &&
+        new Date(a.createdAt.toDate ? a.createdAt.toDate() : a.createdAt)
+          .toISOString()
+          .slice(0, 10) === filterDate.value);
+    return matchesStudent && matchesTitle && matchesDate;
+  });
+});
 
 const formatDate = (timestamp) => {
-  if (!timestamp) return ''
-  const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp)
-  return date.toLocaleDateString()
-}
+  if (!timestamp) return "";
+  const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
+  return date.toLocaleDateString();
+};
 
 const handleSignOut = async () => {
-  await signOut()
-  router.push('/login')
-}
+  await signOut();
+  router.push("/login");
+};
 
-watch(userId, (newUid) => {
-  if (newUid) {
-    fetchAssignments()
-  }
-}, { immediate: true })
+watch(
+  userId,
+  (newUid) => {
+    if (newUid) {
+      fetchAssignments();
+    }
+  },
+  { immediate: true },
+);
 
-watch([() => isAuthReady && isAuthReady.value, () => user.value], ([ready, val]) => {
-  if (ready && val === null) {
-    router.push('/login')
-  }
-}, { immediate: true })
+watch(
+  [() => isAuthReady && isAuthReady.value, () => user.value],
+  ([ready, val]) => {
+    if (ready && val === null) {
+      router.push("/login");
+    }
+  },
+  { immediate: true },
+);
 
-emitter.on('assignmentsChanged', fetchAssignments)
+emitter.on("assignmentsChanged", fetchAssignments);
 </script>
