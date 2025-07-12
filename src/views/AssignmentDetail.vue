@@ -28,7 +28,6 @@
       </div>
     </div>
 
-    <!-- Assignment Not Found -->
     <div v-else-if="!assignment" class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div class="text-center py-12">
         <h3 class="text-lg font-medium text-gray-900 mb-2">Assignment not found</h3>
@@ -39,12 +38,9 @@
       </div>
     </div>
 
-    <!-- Main Content -->
     <main v-else class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div class="card p-8">
-        <!-- View Mode -->
         <div v-if="!isEditing" class="space-y-6">
-          <!-- Header Info -->
           <div class="flex justify-between items-start">
             <div>
               <h2 class="text-2xl font-bold text-gray-900">{{ assignment.studentName }}</h2>
@@ -59,7 +55,6 @@
             </div>
           </div>
 
-          <!-- Score Breakdown -->
           <div>
             <h3 class="text-lg font-medium text-gray-900 mb-4">Score Breakdown</h3>
             <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -75,9 +70,7 @@
           </div>
         </div>
 
-        <!-- Edit Mode -->
         <form v-else @submit.prevent="handleSave" class="space-y-6">
-          <!-- Basic Info -->
           <div class="grid gap-6 sm:grid-cols-2">
             <div>
               <label for="editStudentName" class="block text-sm font-medium text-gray-700 mb-1">
@@ -105,7 +98,6 @@
             </div>
           </div>
 
-          <!-- Question Scores -->
           <div>
             <h3 class="text-lg font-medium text-gray-900 mb-4">Question Scores</h3>
             <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -128,7 +120,6 @@
               </div>
             </div>
 
-            <!-- Total Score Display -->
             <div class="bg-gray-50 rounded-lg p-4 mt-6">
               <div class="text-center">
                 <p class="text-sm text-gray-600">Total Score</p>
@@ -137,12 +128,10 @@
             </div>
           </div>
 
-          <!-- Error Message -->
           <div v-if="error" class="text-red-600 text-sm">
             {{ error }}
           </div>
 
-          <!-- Submit Buttons -->
           <div class="flex justify-end space-x-4">
             <button type="button" @click="toggleEdit" class="btn-secondary">
               Cancel
@@ -227,7 +216,6 @@ const handleSave = async () => {
     await updateAssignment(route.params.id, updates)
     isEditing.value = false
     
-    // Refresh data
     await fetchAssignments()
   } catch (err) {
     error.value = 'Failed to update assignment. Please try again.'
