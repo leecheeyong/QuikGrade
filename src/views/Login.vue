@@ -3,7 +3,8 @@
     class="min-h-screen bg-gradient-to-br from-primary-50 to-white flex items-center justify-center px-4"
   >
     <div class="card w-full max-w-md p-8">
-      <div class="text-center mb-8">
+      <div class="text-center mb-8 flex flex-col items-center">
+        <img src="/logo.png" alt="QuikGrade Logo" class="h-8 w-8 mb-2" />
         <h1 class="text-3xl font-bold text-gray-900 mb-2">QuikGrade</h1>
         <p class="text-gray-600">Fast, clean grading for teachers</p>
       </div>

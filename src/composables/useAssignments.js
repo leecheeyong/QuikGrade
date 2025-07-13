@@ -4,6 +4,7 @@ import {
   addDoc,
   getDocs,
   doc,
+  getDoc,
   updateDoc,
   deleteDoc,
   query,
@@ -98,6 +99,21 @@ export function useAssignments(userId) {
     return computed(() => assignments.value.find((a) => a.id === id));
   };
 
+  const getAssignmentDocById = async (id) => {
+    try {
+      const docRef = doc(db, "assignments", id);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        return { id: docSnap.id, ...docSnap.data() };
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Error fetching assignment by id:", error);
+      return null;
+    }
+  };
+
   return {
     assignments,
     loading,
@@ -106,5 +122,6 @@ export function useAssignments(userId) {
     updateAssignment,
     deleteAssignment,
     getAssignmentById,
+    getAssignmentDocById,
   };
 }

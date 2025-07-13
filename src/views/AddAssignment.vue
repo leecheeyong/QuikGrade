@@ -1,20 +1,28 @@
 <template>
   <div class="min-h-screen bg-gray-50">
     <header class="bg-white shadow-sm border-b border-gray-200">
-      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center h-16">
-          <router-link to="/dashboard" class="btn-secondary mr-4">
-            ← Back
-          </router-link>
-          <h1 class="text-2xl font-bold text-gray-900">Add Assignment</h1>
+      <div class="max-w-3xl mx-auto px-2 sm:px-4 lg:px-8">
+        <div class="flex flex-col sm:flex-row sm:items-center h-auto sm:h-16 py-4 sm:py-0">
+          <div class="flex items-center mb-2 sm:mb-0">
+            <router-link
+              to="/dashboard"
+              class="btn-secondary mr-2 sm:mr-4 mb-2 sm:mb-0"
+            >
+              ← Back
+            </router-link>
+            <img src="/logo.png" alt="QuikGrade Logo" class="h-8 w-8 mr-2" />
+            <h1 class="text-xl sm:text-2xl font-bold text-gray-900">
+              Add Assignment
+            </h1>
+          </div>
         </div>
       </div>
     </header>
 
-    <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div class="card p-8">
+    <main class="max-w-3xl mx-auto px-2 sm:px-4 lg:px-8 py-4 sm:py-8">
+      <div class="card p-4 sm:p-8">
         <form @submit.prevent="handleSubmit" class="space-y-6">
-          <div class="grid gap-6 sm:grid-cols-2">
+          <div class="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2">
             <div>
               <label
                 for="studentName"
@@ -63,14 +71,14 @@
               min="1"
               max="50"
               required
-              class="input-field max-w-xs"
+              class="input-field max-w-full sm:max-w-xs"
               placeholder="Enter number of questions"
             />
           </div>
 
           <div v-if="numQuestions > 0" class="space-y-4">
             <h3 class="text-lg font-medium text-gray-900">Question Scores</h3>
-            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
               <div
                 v-for="i in numQuestions"
                 :key="i"
@@ -97,7 +105,7 @@
             <div class="bg-gray-50 rounded-lg p-4 mt-6">
               <div class="text-center">
                 <p class="text-sm text-gray-600">Total Score</p>
-                <p class="text-3xl font-bold text-primary-600 mt-1">
+                <p class="text-2xl sm:text-3xl font-bold text-primary-600 mt-1">
                   {{ totalScore }}
                 </p>
               </div>
@@ -108,14 +116,17 @@
             {{ error }}
           </div>
 
-          <div class="flex justify-end space-x-4">
-            <router-link to="/dashboard" class="btn-secondary">
+          <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4">
+            <router-link
+              to="/dashboard"
+              class="btn-secondary w-full sm:w-auto"
+            >
               Cancel
             </router-link>
             <button
               type="submit"
               :disabled="isLoading || !isFormValid"
-              class="btn-primary"
+              class="btn-primary w-full sm:w-auto"
             >
               <span v-if="isLoading">Saving...</span>
               <span v-else>Save Assignment</span>
