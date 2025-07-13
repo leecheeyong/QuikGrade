@@ -2,7 +2,9 @@
   <div class="min-h-screen bg-gray-50">
     <header class="bg-white shadow-sm border-b border-gray-200">
       <div class="max-w-3xl mx-auto px-2 sm:px-4 lg:px-8">
-        <div class="flex flex-col sm:flex-row sm:items-center h-auto sm:h-16 py-4 sm:py-0">
+        <div
+          class="flex flex-col sm:flex-row sm:items-center h-auto sm:h-16 py-4 sm:py-0"
+        >
           <div class="flex items-center mb-2 sm:mb-0">
             <router-link
               to="/dashboard"
@@ -78,7 +80,9 @@
 
           <div v-if="numQuestions > 0" class="space-y-4">
             <h3 class="text-lg font-medium text-gray-900">Question Scores</h3>
-            <div class="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            <div
+              class="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+            >
               <div
                 v-for="i in numQuestions"
                 :key="i"
@@ -116,11 +120,10 @@
             {{ error }}
           </div>
 
-          <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4">
-            <router-link
-              to="/dashboard"
-              class="btn-secondary w-full sm:w-auto"
-            >
+          <div
+            class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4"
+          >
+            <router-link to="/dashboard" class="btn-secondary w-full sm:w-auto">
               Cancel
             </router-link>
             <button

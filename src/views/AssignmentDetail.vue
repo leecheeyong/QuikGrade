@@ -2,14 +2,23 @@
   <div class="min-h-screen bg-gray-50">
     <header class="bg-white shadow-sm border-b border-gray-200">
       <div class="max-w-3xl mx-auto px-2 sm:px-4 lg:px-8">
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between h-auto sm:h-16 py-4 sm:py-0">
-          <div class="flex flex-col sm:flex-row sm:items-center w-full sm:w-auto">
+        <div
+          class="flex flex-col sm:flex-row sm:items-center sm:justify-between h-auto sm:h-16 py-4 sm:py-0"
+        >
+          <div
+            class="flex flex-col sm:flex-row sm:items-center w-full sm:w-auto"
+          >
             <div class="flex items-center mb-2 sm:mb-0">
-              <router-link to="/dashboard" class="btn-secondary mr-2 sm:mr-4 mb-2 sm:mb-0">
+              <router-link
+                to="/dashboard"
+                class="btn-secondary mr-2 sm:mr-4 mb-2 sm:mb-0"
+              >
                 ← Back
               </router-link>
               <img src="/logo.png" alt="QuikGrade Logo" class="h-8 w-8 mr-2" />
-              <h1 class="text-xl sm:text-2xl font-bold text-gray-900">Assignment Details</h1>
+              <h1 class="text-xl sm:text-2xl font-bold text-gray-900">
+                Assignment Details
+              </h1>
             </div>
           </div>
           <div class="flex space-x-2 mt-2 sm:mt-0 justify-end">
@@ -56,12 +65,16 @@
     <main v-else class="max-w-3xl mx-auto px-2 sm:px-4 lg:px-8 py-4 sm:py-8">
       <div class="card p-4 sm:p-8">
         <div v-if="!isEditing" class="space-y-6">
-          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div
+            class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
+          >
             <div>
               <h2 class="text-xl sm:text-2xl font-bold text-gray-900">
                 {{ assignment.studentName }}
               </h2>
-              <p class="text-gray-600 mt-1 text-base sm:text-lg">{{ assignment.title }}</p>
+              <p class="text-gray-600 mt-1 text-base sm:text-lg">
+                {{ assignment.title }}
+              </p>
               <p class="text-sm text-gray-500 mt-1">
                 Created {{ formatDate(assignment.createdAt) }}
               </p>
@@ -129,7 +142,9 @@
             <h3 class="text-lg font-medium text-gray-900 mb-4">
               Question Scores
             </h3>
-            <div class="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            <div
+              class="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+            >
               <div
                 v-for="(score, index) in editForm.scores"
                 :key="index"
@@ -166,11 +181,21 @@
             {{ error }}
           </div>
 
-          <div class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4">
-            <button type="button" @click="toggleEdit" class="btn-secondary w-full sm:w-auto">
+          <div
+            class="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-4"
+          >
+            <button
+              type="button"
+              @click="toggleEdit"
+              class="btn-secondary w-full sm:w-auto"
+            >
               Cancel
             </button>
-            <button type="submit" :disabled="isSaving" class="btn-primary w-full sm:w-auto">
+            <button
+              type="submit"
+              :disabled="isSaving"
+              class="btn-primary w-full sm:w-auto"
+            >
               <span v-if="isSaving">Saving...</span>
               <span v-else>Save Changes</span>
             </button>
@@ -186,7 +211,7 @@ import { ref, computed, watch, onMounted, onUnmounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useAuth } from "../composables/useAuth";
 import { useAssignments } from "../composables/useAssignments";
-import emitter from '../eventBus'
+import emitter from "../eventBus";
 
 const route = useRoute();
 const router = useRouter();
@@ -259,7 +284,7 @@ const handleSave = async () => {
     isEditing.value = false;
 
     await fetchAssignments();
-    emitter.emit('assignmentsChanged')
+    emitter.emit("assignmentsChanged");
   } catch (err) {
     error.value = "Failed to update assignment. Please try again.";
     console.error("Error updating assignment:", err);
@@ -295,10 +320,10 @@ const fetchAssignmentDetail = async () => {
 
 onMounted(() => {
   fetchAssignmentDetail();
-  emitter.on('assignmentsChanged', fetchAssignmentDetail);
+  emitter.on("assignmentsChanged", fetchAssignmentDetail);
 });
 
 onUnmounted(() => {
-  emitter.off('assignmentsChanged', fetchAssignmentDetail);
+  emitter.off("assignmentsChanged", fetchAssignmentDetail);
 });
 </script>

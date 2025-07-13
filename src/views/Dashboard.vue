@@ -2,18 +2,32 @@
   <div class="min-h-screen bg-gray-50">
     <header class="bg-white shadow-sm border-b border-gray-200">
       <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
-        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center h-auto sm:h-16 py-4 sm:py-0 gap-2 sm:gap-0">
-          <div class="flex flex-col sm:flex-row sm:items-center w-full sm:w-auto">
+        <div
+          class="flex flex-col sm:flex-row sm:justify-between sm:items-center h-auto sm:h-16 py-4 sm:py-0 gap-2 sm:gap-0"
+        >
+          <div
+            class="flex flex-col sm:flex-row sm:items-center w-full sm:w-auto"
+          >
             <div class="flex items-center mb-2 sm:mb-0">
               <img src="/logo.png" alt="QuikGrade Logo" class="h-8 w-8 mr-2" />
-              <h1 class="text-xl sm:text-2xl font-bold text-gray-900">QuikGrade</h1>
+              <h1 class="text-xl sm:text-2xl font-bold text-gray-900">
+                QuikGrade
+              </h1>
             </div>
           </div>
-          <div class="flex flex-col sm:flex-row items-end sm:items-center gap-2 sm:gap-4 w-full sm:w-auto">
-            <span v-if="userEmail" class="text-gray-700 text-sm text-right sm:text-left">
+          <div
+            class="flex flex-col sm:flex-row items-end sm:items-center gap-2 sm:gap-4 w-full sm:w-auto"
+          >
+            <span
+              v-if="userEmail"
+              class="text-gray-700 text-sm text-right sm:text-left"
+            >
               {{ userEmail }}
             </span>
-            <button @click="handleSignOut" class="btn-secondary w-full sm:w-auto">
+            <button
+              @click="handleSignOut"
+              class="btn-secondary w-full sm:w-auto"
+            >
               Sign Out
             </button>
           </div>
@@ -26,7 +40,9 @@
         class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8"
       >
         <div>
-          <h2 class="text-lg sm:text-xl font-semibold text-gray-900">Your Assignments</h2>
+          <h2 class="text-lg sm:text-xl font-semibold text-gray-900">
+            Your Assignments
+          </h2>
           <p class="text-gray-600 mt-1 text-sm sm:text-base">
             {{ assignments.length }} total assignments
           </p>
@@ -66,7 +82,11 @@
           placeholder="Filter by assignment title"
           class="input-field max-w-full sm:max-w-xs"
         />
-        <input v-model="filterDate" type="date" class="input-field max-w-full sm:max-w-xs" />
+        <input
+          v-model="filterDate"
+          type="date"
+          class="input-field max-w-full sm:max-w-xs"
+        />
       </div>
 
       <div v-if="loading" class="text-center py-12">

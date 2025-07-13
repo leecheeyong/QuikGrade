@@ -115,6 +115,6 @@ watch(
     if (val) {
       router.push("/dashboard");
     }
-  }
+  },
 );
 </script>
