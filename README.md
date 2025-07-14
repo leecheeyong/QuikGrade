@@ -32,6 +32,7 @@ QuikGrade is a fast, clean, and modern grading tool for teachers. It allows you 
    - Edit the `src/firebase.js` file, replace with your Firebase credentials
 
 ## Credits
+- This project was inspired by [quickgra.de](https://quickgra.de/) & [quickgrade.us](https://quickgrade.us/)
 
 ## Contributing
 
