@@ -372,7 +372,6 @@ watch(
 emitter.on("assignmentsChanged", fetchAssignments);
 
 function exportAssignmentCSVById(title) {
-  // title is the assignment title
   const grouped = assignments.value.filter((a) => a.title === title);
   if (!grouped.length) return;
   const maxQuestions = Math.max(...grouped.map((a) => a.scores.length));
@@ -380,7 +379,6 @@ function exportAssignmentCSVById(title) {
   for (let i = 1; i <= maxQuestions; i++) headers.push(`Q${i}`);
   const rows = grouped.map((a) => {
     const row = [a.studentName, a.title, a.totalScore, ...a.scores];
-    // pad with empty for missing questions
     while (row.length < 3 + maxQuestions) row.push("");
     return row;
   });
