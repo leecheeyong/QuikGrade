@@ -1,6 +1,6 @@
 <img src="/public/logo.png" width="100">
 
-# QuikGrade
+# [QuikGrade](https://quikgrade.vercel.app)
 
 QuikGrade is a fast, clean, and modern grading tool for teachers. It allows you to add assignments, input scores, and instantly see totals, all in a minimal and mobile-friendly interface.
 
@@ -13,6 +13,7 @@ QuikGrade is a fast, clean, and modern grading tool for teachers. It allows you 
 - Export assignment or student scores as CSV
 
 ## Setup
+
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/leecheeyong/QuikGrade.git
@@ -27,13 +28,13 @@ QuikGrade is a fast, clean, and modern grading tool for teachers. It allows you 
 3. **Configure Firebase:**
    - Go to [Firebase Console](https://console.firebase.google.com/) and create a new project.
    - Enable **Authentication** (Email/Password).
-   - Set up **Cloud Firestore** in test mode (or with secured rules). 
+   - Set up **Cloud Firestore** in test mode (or with secured rules).
    - Edit the `src/firebase.js` file, replace with your Firebase credentials
 
 ## Credits
 
-
 ## Contributing
+
 Contributions are welcome! Please [open issues](https://github.com/leecheeyong/QuikGrade/issues) or [pull requests](https://github.com/leecheeyong/QuikGrade/pulls) for improvements and bug fixes.
 
 ## License
