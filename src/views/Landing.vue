@@ -80,7 +80,7 @@
     <footer class="bg-gray-50 border-t border-gray-200 mt-auto">
       <div class="max-w-4xl mx-auto px-4 py-8 text-center">
         <span class="text-gray-900 font-semibold">QuikGrade</span>
-        <span class="text-gray-500 ml-2"
+        <span class="text-gray-500 ml-1"
           >is available as an open source under the terms of the
           <a
             class="underline decoration-sky-500"
