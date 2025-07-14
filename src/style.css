@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-/* Custom styles */
 body {
   font-family:
     "Inter",
@@ -11,7 +10,6 @@ body {
     sans-serif;
 }
 
-/* Custom component styles */
 .btn-primary {
   @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200;
 }
