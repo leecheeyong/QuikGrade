@@ -4,6 +4,8 @@
 
 QuikGrade is a fast, clean, and modern grading tool for teachers. It allows you to add assignments, input scores, and instantly see totals, all in a minimal and mobile-friendly interface.
 
+![QuikGrade Demo Video](https://github.com/user-attachments/assets/3e550915-037c-4802-a1d2-334c33f6179f)
+
 ## Features
 
 - Add assignments for students with customizable question counts
