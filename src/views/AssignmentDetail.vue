@@ -323,6 +323,16 @@ onMounted(() => {
   emitter.on("assignmentsChanged", fetchAssignmentDetail);
 });
 
+watch(
+  () => route.params.id,
+  (newId, oldId) => {
+    if (newId !== oldId) {
+      fetchAssignmentDetail();
+    }
+  },
+  { immediate: false },
+);
+
 onUnmounted(() => {
   emitter.off("assignmentsChanged", fetchAssignmentDetail);
 });
